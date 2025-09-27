@@ -1,0 +1,14 @@
+# Minimal Python
+
+## Environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+## PyCharm
+.idea/
+
+## Visual Studio Code
+.vscode/

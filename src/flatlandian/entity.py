@@ -1,0 +1,45 @@
+"""Contains `Entity` class."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from pygame import Vector2
+
+
+@dataclass(eq=False, kw_only=True)
+class Entity:
+    """Generic circular entity."""
+
+    position: Vector2
+    velocity: Vector2
+
+    acceleration: Vector2 | None = None
+    radius: float = 0
+    name: str = ""
+
+    @property
+    def heading(self) -> float:
+        """Return conventional heading from velocity.
+
+        +ve degrees clockwise from y-axis.
+        """
+        return (self.velocity.angle + 90) % 360
+
+    @property
+    def speed(self) -> float:
+        """Return speed from velocity."""
+        return self.velocity.magnitude()
+
+    def move(self, delta_time: float = 1) -> None:
+        """Move the entity."""
+        if self.acceleration:
+            self.velocity += self.acceleration * delta_time
+
+        self.position += self.velocity * delta_time
+
+    def update(self, delta_time: float = 1) -> None:
+        """Update the entity."""
+        self.move(delta_time)

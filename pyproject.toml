@@ -1,0 +1,50 @@
+[project]
+name = "flatlandian"
+version = "0.0.1"
+requires-python = ">=3.12"
+dependencies = [
+    "pygame-ce>=2.5.5",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.18.1",
+    "pre-commit>=4.3.0",
+    "pytest>=8.4.1",
+    "ruff>=0.13.2",
+]
+
+[tool.mypy]
+strict = true
+disallow_any_unimported = true
+no_implicit_optional = true
+warn_unreachable = true
+show_error_codes = true
+pretty = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "COM812",  # missing-trailing-comma: conflicts with ruff formatter
+    "D105",  #  undocumented-magic-method
+    "S311",  # suspicious-non-cryptographic-random-usage
+]
+
+# Allow 'unsafe' fixes:
+extend-safe-fixes = [
+    "TC",  # flake8-type-checking
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Not relevant in tests:
+"tests/*" = [
+    "S101",  # Use of assert detected
+    "PLR2004",  # Magic value used in comparison
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
