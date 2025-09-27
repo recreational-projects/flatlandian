@@ -33,13 +33,13 @@ class Entity:
         """Return speed from velocity."""
         return self.velocity.magnitude()
 
-    def move(self, delta_time: float = 1) -> None:
+    def move(self, delta_time: float) -> None:
         """Move the entity."""
         if self.acceleration:
             self.velocity += self.acceleration * delta_time
 
         self.position += self.velocity * delta_time
 
-    def update(self, delta_time: float = 1) -> None:
+    def update(self, delta_time: float) -> None:
         """Update the entity."""
         self.move(delta_time)
