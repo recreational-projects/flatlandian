@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import random
-from dataclasses import dataclass
+from dataclasses import InitVar, dataclass, field
 from typing import TYPE_CHECKING
 
 from pygame import Vector2
@@ -18,22 +18,15 @@ if TYPE_CHECKING:
 class World:
     """Rectangular."""
 
-    size: Vector2
-    entities: set[Entity]
+    size_from_sequence: InitVar[Sequence[float]]
+    size: Vector2 = field(init=False)
     centered_origin: bool = False
-    step_counter: int
+    step_counter: int = field(init=False, default=0)
+    entities: set[Entity] = field(init=False, default_factory=set)
 
-    def __init__(
-        self,
-        *,
-        size_from_sequence: Sequence[float],
-        centered_origin: bool = False,
-    ) -> None:
+    def __post_init__(self, size_from_sequence: Sequence[float]) -> None:
         """Initialize a `World`."""
         self.size = Vector2(size_from_sequence)
-        self.centered_origin = centered_origin
-        self.entities: set[Entity] = set()
-        self.step_counter = 0
 
     @property
     def origin_offset(self) -> Vector2:
