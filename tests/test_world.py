@@ -20,9 +20,9 @@ def test_create() -> None:
     assert repr(w) == (
         "World("
         "size=Vector2(1, 1), "
-        "entities=set(), "
         "centered_origin=False, "
-        "step_counter=0"
+        "step_counter=0, "
+        "entities=set()"
         ")"
     )
 
@@ -39,9 +39,9 @@ def test_create__optional_fields() -> None:
     assert repr(w) == (
         "World("
         "size=Vector2(1, 1), "
-        "entities=set(), "
         "centered_origin=True, "
-        "step_counter=0"
+        "step_counter=0, "
+        "entities=set()"
         ")"
     )
 
