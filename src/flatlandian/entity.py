@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 @dataclass(eq=False, kw_only=True)
 class Entity:
-    """Generic circular entity."""
+    """Generic circular entity. Hashable."""
 
     position: Vector2
     velocity: Vector2
