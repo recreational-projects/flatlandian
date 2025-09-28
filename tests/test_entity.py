@@ -15,14 +15,14 @@ def test_create() -> None:
     assert e.velocity == Vector2(0, 0)
     assert e.acceleration is None
     assert e.radius == 0
-    assert e.name == ""
+    assert e.name is None
     assert (
         repr(e) == "Entity("
         "position=Vector2(0, 0), "
         "velocity=Vector2(0, 0), "
         "acceleration=None, "
         "radius=0, "
-        "name=''"
+        "name=None"
         ")"
     )
     assert (
@@ -31,7 +31,7 @@ def test_create() -> None:
         "velocity=Vector2(0, 0), "
         "acceleration=None, "
         "radius=0, "
-        "name=''"
+        "name=None"
         ")"
     )
 
