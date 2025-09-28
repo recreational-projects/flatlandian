@@ -18,7 +18,7 @@ class Entity:
 
     acceleration: Vector2 | None = None
     radius: float = 0
-    name: str = ""
+    name: str | None = None
 
     @property
     def heading(self) -> float:
