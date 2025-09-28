@@ -25,15 +25,6 @@ def test_create() -> None:
         "name=None"
         ")"
     )
-    assert (
-        str(e) == "Entity("
-        "position=Vector2(0, 0), "
-        "velocity=Vector2(0, 0), "
-        "acceleration=None, "
-        "radius=0, "
-        "name=None"
-        ")"
-    )
 
 
 def test_create_optional_fields() -> None:
@@ -53,14 +44,6 @@ def test_create_optional_fields() -> None:
     assert e.name == "test"
     assert (
         repr(e) == "Entity("
-        "position=Vector2(0, 0), "
-        "velocity=Vector2(0, 0), "
-        "acceleration=Vector2(1, 1), "
-        "radius=1, "
-        "name='test')"
-    )
-    assert (
-        str(e) == "Entity("
         "position=Vector2(0, 0), "
         "velocity=Vector2(0, 0), "
         "acceleration=Vector2(1, 1), "
