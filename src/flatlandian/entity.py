@@ -17,7 +17,7 @@ class Entity:
     velocity: Vector2
 
     acceleration: Vector2 | None = None
-    radius: float = 0
+    radius: float = 10
     name: str | None = None
 
     @property
