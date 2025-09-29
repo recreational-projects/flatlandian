@@ -11,13 +11,13 @@ if TYPE_CHECKING:
 
 @dataclass(eq=False, kw_only=True)
 class Entity:
-    """Generic circular entity."""
+    """Generic circular entity. Hashable."""
 
     position: Vector2
     velocity: Vector2
 
     acceleration: Vector2 | None = None
-    radius: float = 0
+    radius: float = 10
     name: str | None = None
 
     @property
