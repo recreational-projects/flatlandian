@@ -33,6 +33,11 @@ class World:
         """Return the origin's offset."""
         return self.size / 2 if self.centered_origin else Vector2(0, 0)
 
+    @property
+    def center(self) -> Vector2:
+        """Return the center of the world."""
+        return Vector2(0, 0) if self.centered_origin else self.size / 2
+
     def __str__(self) -> str:
         """Human-readable description."""
         return (
