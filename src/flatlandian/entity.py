@@ -33,6 +33,10 @@ class Entity:
         """Return speed from velocity."""
         return self.velocity.magnitude()
 
+    def distance_to_squared(self: Entity, other: Entity) -> float:
+        """Return square of distance between self and other."""
+        return (other.position - self.position).magnitude_squared()
+
     def move(self, delta_time: float) -> None:
         """Move the entity."""
         if self.acceleration:
