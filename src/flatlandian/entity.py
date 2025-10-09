@@ -3,10 +3,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from pygame import Vector2
+from pygame import Vector2
 
 
 @dataclass(eq=False, kw_only=True)
@@ -37,8 +35,15 @@ class Entity:
         """Return square of distance between self and other."""
         return (other.position - self.position).magnitude_squared()
 
+    def stop(self) -> None:
+        """Stop the entity."""
+        if self.acceleration:
+            self.acceleration = Vector2(0, 0)
+
+        self.velocity = Vector2(0, 0)
+
     def move(self, delta_time: float) -> None:
-        """Move the entity."""
+        """Move the entity over `delta time`."""
         if self.acceleration:
             self.velocity += self.acceleration * delta_time
 
