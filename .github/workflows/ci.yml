@@ -1,4 +1,4 @@
-name: Python 3.12 application with uv on Ubuntu
+name: Python 3.x application with uv on Ubuntu
 
 on:
   push:
@@ -13,6 +13,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ "3.12", "3.13", "3.14" ]
 
     steps:
     - name: Checkout repo
