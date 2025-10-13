@@ -66,7 +66,7 @@ def test_add_entity() -> None:
     """Test that an `Entity` can be added to the `World`."""
     # arrange
     w = World(size_from_sequence=(100, 100))
-    e = Entity(position=Vector2(), velocity=Vector2())
+    e = Entity(position=Vector2(), velocity=Vector2(), world=w)
     # act
     w.add_entity(e)
     # assert

@@ -3,8 +3,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
 from pygame import Vector2
+
+if TYPE_CHECKING:
+    from flatlandian.world import World
 
 
 @dataclass(eq=False, kw_only=True)
@@ -17,6 +21,7 @@ class Entity:
     acceleration: Vector2 | None = None
     radius: float = 10
     name: str | None = None
+    world: World | None = None
 
     @property
     def heading(self) -> float:
