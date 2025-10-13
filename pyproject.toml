@@ -1,6 +1,6 @@
 [project]
 name = "flatlandian"
-version = "0.0.3"
+version = "0.0.4"
 requires-python = ">=3.12"
 dependencies = [
     "pygame-ce>=2.5.5",
@@ -12,9 +12,9 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
-    "mypy>=1.18.1",
+    "mypy>=1.18.2",
     "pre-commit>=4.3.0",
-    "pytest>=8.4.1",
+    "pytest>=8.4.2",
     "ruff>=0.14.0",
 ]
 

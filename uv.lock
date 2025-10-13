@@ -40,7 +40,7 @@ wheels = [
 
 [[package]]
 name = "flatlandian"
-version = "0.0.3"
+version = "0.0.4"
 source = { editable = "." }
 dependencies = [
     { name = "pygame-ce" },
@@ -59,9 +59,9 @@ requires-dist = [{ name = "pygame-ce", specifier = ">=2.5.5" }]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "mypy", specifier = ">=1.18.1" },
+    { name = "mypy", specifier = ">=1.18.2" },
     { name = "pre-commit", specifier = ">=4.3.0" },
-    { name = "pytest", specifier = ">=8.4.1" },
+    { name = "pytest", specifier = ">=8.4.2" },
     { name = "ruff", specifier = ">=0.14.0" },
 ]
 
