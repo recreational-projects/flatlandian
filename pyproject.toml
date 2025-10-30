@@ -3,6 +3,7 @@ name = "flatlandian"
 version = "0.0.1"
 requires-python = ">=3.12"
 dependencies = [
+    "pdoc>=16.0.0",
     "pygame-ce>=2.5.5",
 ]
 
@@ -31,6 +32,7 @@ select = ["ALL"]
 ignore = [
     "COM812",  # missing-trailing-comma: conflicts with ruff formatter
     "S311",  # suspicious-non-cryptographic-random-usage
+    "D105",  # undocumented-magic-method
 ]
 
 # Allow 'unsafe' fixes:
