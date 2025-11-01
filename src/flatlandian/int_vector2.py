@@ -13,7 +13,24 @@ if TYPE_CHECKING:
 
 @dataclass(frozen=True)
 class IntVector2:
-    """Integer point."""
+    """A 2-dimensional integer vector.
+
+    `IntVector2() -> IntVector2(0, 0)`
+
+    `IntVector2(x: int, y: int) -> IntVector2`
+
+    `IntVector2(int, int) -> IntVector2`
+
+    Attempting to construct with `float` parameters raises `TypeError`.
+
+    Equivalents to these `pygame.Vector2` constructors aren't yet supported:
+
+    `Vector2(int) -> Vector2`
+
+    `Vector2(Vector2) -> Vector2`
+
+    `Vector2((x, y)) -> Vector2`
+    """
 
     x: int = 0
     """x coordinate."""
@@ -27,12 +44,18 @@ class IntVector2:
 
     @classmethod
     def from_tuple(cls, value: tuple[int, int]) -> IntVector2:
-        """For compatibility with Pygame functions."""
+        """Construct vector from `tuple` of `int`s.
+
+        For compatibility with Pygame functions.
+        """
         return cls(value[0], value[1])
 
     @property
     def as_vector2(self) -> pg.Vector2:
-        """For compatibility with Pygame functions."""
+        """Return `pygame.Vector2`, i.e. float coordinates.
+
+        For compatibility with Pygame functions.
+        """
         return pg.Vector2(self.x, self.y)
 
     def __add__(self, other: IntVector2 | IntPoint) -> IntVector2:
