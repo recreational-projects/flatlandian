@@ -1,5 +1,7 @@
 """Tests for `IntVector2` class."""
 
+import pytest
+
 from flatlandian.int_vector2 import IntVector2
 
 
@@ -11,6 +13,14 @@ def test_create_from_2_ints() -> None:
     # assert
     assert v.x == 1
     assert v.y == 2
+
+
+def test_create_from_float_raises_error() -> None:
+    """Test `IntVector2` can't be created with a `float`."""
+    # arrange
+    # act
+    with pytest.raises(TypeError):
+        IntVector2(3.4, 5)  # type: ignore[arg-type]
 
 
 def test_create_from_kwargs() -> None:

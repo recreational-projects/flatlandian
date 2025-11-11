@@ -20,6 +20,11 @@ class IntVector2:
     y: int = 0
     """y coordinate."""
 
+    def __post_init__(self) -> None:
+        if not isinstance(self.x, int) or not isinstance(self.y, int):
+            err_msg = f"Expected 2 `int`s; got x={self.x}, y={self.y}"  # type: ignore[unreachable]
+            raise TypeError(err_msg)
+
     @classmethod
     def from_tuple(cls, value: tuple[int, int]) -> IntVector2:
         """For compatibility with Pygame functions."""
