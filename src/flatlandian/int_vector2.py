@@ -11,14 +11,13 @@ if TYPE_CHECKING:
     from pygame.typing import IntPoint
 
 
-
 @dataclass(frozen=True)
 class IntVector2:
     """Integer point."""
 
-    x: int
+    x: int = 0
     """x coordinate."""
-    y: int
+    y: int = 0
     """y coordinate."""
 
     @classmethod
