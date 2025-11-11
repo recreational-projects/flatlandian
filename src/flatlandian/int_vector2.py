@@ -19,7 +19,7 @@ def _ensure_2_elements(value: Sized) -> bool:
     return True
 
 
-@dataclass(frozen=True)
+@dataclass
 class IntVector2:
     """A 2-dimensional integer vector.
 
@@ -40,15 +40,29 @@ class IntVector2:
     `Vector2((x, y)) -> Vector2`
     """
 
-    x: int = 0
+    _x: int
     """x coordinate."""
-    y: int = 0
+    _y: int
     """y coordinate."""
 
-    def __post_init__(self) -> None:
-        if not isinstance(self.x, int) or not isinstance(self.y, int):
-            err_msg = f"Expected 2 `int`s; got x={self.x}, y={self.y}"  # type: ignore[unreachable]
+    def __init__(self, x: int=0, y: int=0) -> None:
+        """Initialize a vector from `x` and `y`."""
+        if not isinstance(x, int) or not isinstance(y, int):
+            err_msg = f"Expected 2 `int`s; got {x=}, {y=}"  # type: ignore[unreachable]
             raise TypeError(err_msg)
+
+        self._x = x
+        self._y = y
+
+    @property
+    def x(self) -> int:
+        """Return `x` coordinate."""
+        return self._x
+
+    @property
+    def y(self) -> int:
+        """Return `y` coordinate."""
+        return self._y
 
     @classmethod
     def from_tuple(cls, value: tuple[int, int]) -> IntVector2:

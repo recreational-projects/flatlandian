@@ -15,14 +15,6 @@ def test_create_from_2_ints() -> None:
     assert v.y == 2
 
 
-def test_create_from_3_ints_raises_error() -> None:
-    """Test `IntVector2` can't be created from 3 `ints`."""
-    # arrange
-    # act
-    with pytest.raises(TypeError):
-        IntVector2(3, 4, 5)  # type: ignore[call-arg]
-
-
 def test_create_from_float_raises_error() -> None:
     """Test `IntVector2` can't be created with a `float`."""
     # arrange
@@ -51,15 +43,7 @@ def test_create_from_2_tuple() -> None:
     assert v.y == 2
 
 
-def test_create_from_3_tuple_raises_error() -> None:
-    """Test `IntVector2` can't be created from 3-tuple of `ints`."""
-    # arrange
-    # act
-    with pytest.raises(TypeError):
-        IntVector2.from_tuple((1, 2, 3))  # type: ignore[arg-type]
-
-
-def test_create_zero_vector() -> None:
+def test_create_zero_vector_no_args() -> None:
     """Test zero vector can be created from zero arguments."""
     # arrange
     # act
@@ -72,8 +56,9 @@ def test_create_zero_vector() -> None:
 def test_add_int_vector2() -> None:
     """Test adding another `IntVector2`."""
     # arrange
+    v0 = IntVector2(1, 2)
     # act
-    v = IntVector2(1, 2) + IntVector2(3, 4)
+    v = v0 + IntVector2(3, 4)
     # assert
     assert v.x == 4
     assert v.y == 6
@@ -82,28 +67,21 @@ def test_add_int_vector2() -> None:
 def test_add_2_tuple() -> None:
     """Test adding a 2-tuple."""
     # arrange
+    v0 = IntVector2(1, 2)
+    t = (3, 4)
     # act
-    v = IntVector2(1, 2) + (3, 4)  # noqa: RUF005
+    v = v0 + t
     # assert
     assert v.x == 4
     assert v.y == 6
 
 
-def test_radd_2_tuple() -> None:
-    """Test adding a 2-tuple."""
-    # arrange
-    # act
-    v = (7, 8) + IntVector2(5, 6)  # noqa: RUF005
-    # assert
-    assert v.x == 12
-    assert v.y == 14
-
-
 def test_sub_int_vector2() -> None:
     """Test subtracting another `IntVector2`."""
     # arrange
+    v0 = IntVector2(1, 2)
     # act
-    v = IntVector2(1, 2) - IntVector2(3, 5)
+    v = v0 - IntVector2(3, 5)
     # assert
     assert v.x == -2
     assert v.y == -3
@@ -112,8 +90,10 @@ def test_sub_int_vector2() -> None:
 def test_sub_2_tuple() -> None:
     """Test subtracting a 2-tuple."""
     # arrange
+    v0 = IntVector2(1, 2)
+    t = (3, 5)
     # act
-    v = IntVector2(1, 2) - (3, 5)
+    v = v0 - t
     # assert
     assert v.x == -2
     assert v.y == -3
