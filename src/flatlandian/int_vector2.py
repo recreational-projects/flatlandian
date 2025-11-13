@@ -3,12 +3,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
 
 import pygame as pg
-
-if TYPE_CHECKING:
-    from pygame.typing import IntPoint
 
 
 @dataclass(frozen=True)
@@ -58,17 +54,17 @@ class IntVector2:
         """
         return pg.Vector2(self.x, self.y)
 
-    def __add__(self, other: IntVector2 | IntPoint) -> IntVector2:
+    def __add__(self, other: IntVector2 | tuple[int, int]) -> IntVector2:
         if isinstance(other, IntVector2):
             return IntVector2(self.x + other.x, self.y + other.y)
 
-        return IntVector2(self.x + other[0], self.y + other[0])
+        return IntVector2(self.x + other[0], self.y + other[1])
 
-    def __sub__(self, other: IntVector2 | IntPoint) -> IntVector2:
+    def __sub__(self, other: IntVector2 | tuple[int, int]) -> IntVector2:
         if isinstance(other, IntVector2):
             return IntVector2(self.x - other.x, self.y - other.y)
 
-        return IntVector2(self.x - other[0], self.y - other[0])
+        return IntVector2(self.x - other[0], self.y - other[1])
 
     def __mul__(self, other: int) -> IntVector2:
         return IntVector2(other * self.x, other * self.y)
