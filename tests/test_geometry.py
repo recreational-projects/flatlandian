@@ -21,7 +21,7 @@ def test_absolute_bearing__intvector2() -> None:
     """Test that bearing can be derived from `IntVector2`."""
     # arrange
     dirs = [(0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1), (-1, 0), (-1, 1)]
-    vecs = [IntVector2.from_tuple(c) for c in dirs]
+    vecs = [IntVector2(c) for c in dirs]
     # act
     angles = [geometry.absolute_bearing(v) for v in vecs]
     # assert
