@@ -15,6 +15,14 @@ def test_create_from_2_ints() -> None:
     assert v.y == 2
 
 
+def test_create_from_3_ints_raises_error() -> None:
+    """Test `IntVector2` can't be created from 3 `ints`."""
+    # arrange
+    # act
+    with pytest.raises(TypeError):
+        IntVector2(3, 4, 5)  # type: ignore[call-arg]
+
+
 def test_create_from_float_raises_error() -> None:
     """Test `IntVector2` can't be created with a `float`."""
     # arrange
@@ -41,6 +49,14 @@ def test_create_from_2_tuple() -> None:
     # assert
     assert v.x == 1
     assert v.y == 2
+
+
+def test_create_from_3_tuple_raises_error() -> None:
+    """Test `IntVector2` can't be created from 3-tuple of `ints`."""
+    # arrange
+    # act
+    with pytest.raises(TypeError):
+        IntVector2.from_tuple((1, 2, 3))  # type: ignore[arg-type]
 
 
 def test_create_zero_vector() -> None:
@@ -74,6 +90,18 @@ def test_add_2_tuple() -> None:
     # assert
     assert v.x == 4
     assert v.y == 6
+
+
+def test_radd_2_tuple() -> None:
+    """Test adding a 2-tuple."""
+    # arrange
+    v0 = IntVector2(5, 6)
+    t = (7, 8)
+    # act
+    v = t + v0
+    # assert
+    assert v.x == 12
+    assert v.y == 14
 
 
 def test_sub_int_vector2() -> None:
