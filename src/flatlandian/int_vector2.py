@@ -78,8 +78,7 @@ class IntVector2:
         return IntVector2(self.x + other[0], self.y + other[1])
 
     def __radd__(self, other: tuple[int, int]) -> IntVector2:
-        _ensure_2_elements(other)
-        return IntVector2(other[0] + self.x, other[1] + self.y)
+        return self + other
 
     def __sub__(self, other: IntVector2 | tuple[int, int]) -> IntVector2:
         _ensure_2_elements(other)
@@ -93,7 +92,10 @@ class IntVector2:
         return IntVector2(other[0] - self.x, other[1] - self.y)
 
     def __mul__(self, other: int) -> IntVector2:
-        return IntVector2(other * self.x, other * self.y)
+        return IntVector2(self.x * other, self.y * other)
+
+    def __rmul__(self, other: int) -> IntVector2:
+        return self * other
 
     def __floordiv__(self, other: int) -> IntVector2:
         return IntVector2(self.x // other, self.y // other)

@@ -10,6 +10,7 @@ and this project attempts to adhere to [Semantic Versioning](https://semver.org/
 ### Added
 
 - `Grid` class
+- `IntVector2.__rmul__()`
 
 ## [0.1.1] - 2025-11-24
 

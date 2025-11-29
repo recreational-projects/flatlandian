@@ -117,3 +117,30 @@ def test_sub_2_tuple() -> None:
     # assert
     assert v.x == -2
     assert v.y == -3
+
+def test_rsub_2_tuple() -> None:
+    """Test subtracting from a 2-tuple."""
+    # arrange
+    # act
+    v = (3, 5) - IntVector2(1, 2)
+    # assert
+    assert v.x == 2
+    assert v.y == 3
+
+def test_mul() -> None:
+    """Test multiplying by int."""
+    # arrange
+    # act
+    v = IntVector2(7, 8) * 4
+    # assert
+    assert v.x == 28
+    assert v.y == 32
+
+def test_rmul() -> None:
+    """Test multiplying int."""
+    # arrange
+    # act
+    v = 5 * IntVector2(7, 8)
+    # assert
+    assert v.x == 35
+    assert v.y == 40

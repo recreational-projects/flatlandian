@@ -23,6 +23,4 @@ def absolute_bearing(vec2: Vector2 | IntVector2) -> float:
     if isinstance(vec2, IntVector2):
         vec2 = Vector2(vec2.x, vec2.y)
 
-    angle = 450 - vec2.angle
-    angle %= 360
-    return angle
+    return (450 - vec2.angle) % 360
