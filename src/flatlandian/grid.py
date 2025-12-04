@@ -13,12 +13,19 @@ from flatlandian.int_vector2 import IntVector2
 class Grid:
     """A rectangular grid of cells."""
 
-    DIRECTIONS: ClassVar = {
+    DIRECTIONS: ClassVar = [
         IntVector2(x, y)
-        for x, y in itertools.product(range(-1, 2), repeat=2)
-        for y in range(-1, 2)
-        if (x, y) != (0, 0)
-    }
+        for x, y in [
+            (0, 1),
+            (1, 1),
+            (1, 0),
+            (1, -1),
+            (0, -1),
+            (-1, -1),
+            (-1, 0),
+            (-1, 1),
+        ]
+    ]
 
     size: IntVector2
 
