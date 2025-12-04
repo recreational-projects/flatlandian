@@ -7,6 +7,10 @@ and this project attempts to adhere to [Semantic Versioning](https://semver.org/
 
 ## UNRELEASED - tbc
 
+### Added
+
+- `geometry.relative_bearing()`
+
 ### Changed
 
 - `Grid.DIRECTIONS` is now a list ordered by rotation, instead of set
