@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 def _ensure_2_elements(value: Sized) -> bool:
     if len(value) != 2:  # noqa: PLR2004
-        err_msg = f"Expected 2 elements, got {len(value)} elements."
+        err_msg = f"Expected 2 elements, got {len(value)}: {value}"
         raise TypeError(err_msg)
 
     return True
