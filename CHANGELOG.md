@@ -9,7 +9,8 @@ and this project attempts to adhere to [Semantic Versioning](https://semver.org/
 
 ### Changed
 
-- Improved error message when attempting `IntVector2` operations when != 2 elements
+- `Grid.DIRECTIONS` is now a list ordered by rotation, instead of set
+- Improved error message when attempting `IntVector2` operations with != 2 elements
 
 ## [0.1.2] - 2025-11-30
 
