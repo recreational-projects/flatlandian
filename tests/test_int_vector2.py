@@ -118,6 +118,7 @@ def test_sub_2_tuple() -> None:
     assert v.x == -2
     assert v.y == -3
 
+
 def test_rsub_2_tuple() -> None:
     """Test subtracting from a 2-tuple."""
     # arrange
@@ -127,6 +128,7 @@ def test_rsub_2_tuple() -> None:
     assert v.x == 2
     assert v.y == 3
 
+
 def test_mul() -> None:
     """Test multiplying by int."""
     # arrange
@@ -135,6 +137,7 @@ def test_mul() -> None:
     # assert
     assert v.x == 28
     assert v.y == 32
+
 
 def test_rmul() -> None:
     """Test multiplying int."""
