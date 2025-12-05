@@ -19,8 +19,20 @@ def mean_vector(vec2s: Iterable[Vector2]) -> Vector2:
 
 
 def absolute_bearing(vec2: Vector2 | IntVector2) -> float:
-    """Get bearing: 0 <= degrees < 360, from +ve y-axis."""
-    if isinstance(vec2, IntVector2):
-        vec2 = Vector2(vec2.x, vec2.y)
+    """Return 0 <= degrees < 360, from +ve y-axis in direction of +ve x-axis.
 
-    return (450 - vec2.angle) % 360
+    Clockwise in conventional +ve x-axis right, +ve y-axis up system.
+    """
+    if isinstance(vec2, IntVector2):
+        vec2 = vec2.as_vector2
+
+    return (90 - vec2.angle) % 360
+
+
+def relative_bearing(bearing1: float, bearing2: float) -> float:
+    """Return -180 < degrees <= 180, from +ve y-axis in direction of +ve x-axis.
+
+    Clockwise in conventional +ve x-axis right, +ve y-axis up system.
+    """
+    bearing = ((bearing2 - bearing1 - 180) % 360) - 180
+    return 180 if bearing == -180 else bearing  # noqa: PLR2004
