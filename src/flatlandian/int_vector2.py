@@ -70,6 +70,16 @@ class IntVector2:
     def __len__(self) -> int:
         return len(fields(self))
 
+    def __getitem__(self, key: int) -> int:
+        if key in {0, -2}:
+            return self.x
+
+        if key in {1, -1}:
+            return self.y
+
+        error_msg = f"IntVector2 index {key} out of range"
+        raise IndexError(error_msg)
+
     def __add__(self, other: IntVector2 | tuple[int, int]) -> IntVector2:
         _ensure_2_elements(other)
         if isinstance(other, IntVector2):

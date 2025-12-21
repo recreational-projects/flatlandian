@@ -69,6 +69,16 @@ def test_create_zero_vector() -> None:
     assert v.y == 0
 
 
+def test_get_item() -> None:
+    """Test that ..."""
+    # arrange
+    # act
+    v = IntVector2(9, 10)
+    # assert
+    assert v[0] == 9
+    assert v[1] == 10
+
+
 def test_add_int_vector2() -> None:
     """Test adding another `IntVector2`."""
     # arrange
