@@ -43,27 +43,25 @@ name = "flatlandian"
 version = "0.1.3"
 source = { editable = "." }
 dependencies = [
-    { name = "pdoc" },
     { name = "pygame-ce" },
 ]
 
 [package.dev-dependencies]
 dev = [
     { name = "mypy" },
+    { name = "pdoc" },
     { name = "pre-commit" },
     { name = "pytest" },
     { name = "ruff" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "pdoc", specifier = ">=16.0.0" },
-    { name = "pygame-ce", specifier = ">=2.5.5" },
-]
+requires-dist = [{ name = "pygame-ce", specifier = ">=2.5.5" }]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "mypy", specifier = ">=1.19.0" },
+    { name = "pdoc", specifier = ">=16.0.0" },
     { name = "pre-commit", specifier = ">=4.5.0" },
     { name = "pytest", specifier = ">=9.0.1" },
     { name = "ruff", specifier = ">=0.14.8" },
