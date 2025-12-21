@@ -10,6 +10,7 @@ and this project attempts to adhere to [Semantic Versioning](https://semver.org/
 ### Fixed
 
 - `pdoc` was a runtime instead of dev dependency
+- CI: Python 3.12 was always used, not version from matrix 
 
 ## [0.1.3] - 2025-12-05
 
