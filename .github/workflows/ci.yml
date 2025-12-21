@@ -40,3 +40,6 @@ jobs:
     - name: Lint format with ruff
       # by default: exit with error if rule violations
       run: uv run ruff format
+
+    - name: Test with pytest
+      run: uv run pytest .
