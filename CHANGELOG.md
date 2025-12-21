@@ -7,6 +7,10 @@ and this project attempts to adhere to [Semantic Versioning](https://semver.org/
 
 ## [UNRELEASED] - TBC
 
+### Added
+
+- CI: run tests
+
 ### Fixed
 
 - `pdoc` was a runtime instead of dev dependency
