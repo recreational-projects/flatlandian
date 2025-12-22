@@ -18,7 +18,7 @@ def test_create_from_2_ints() -> None:
 def test_create_from_3_ints_raises_error() -> None:
     """Test `IntVector2` can't be created from 3 `ints`."""
     # arrange
-    # act
+    # act, assert
     with pytest.raises(TypeError):
         IntVector2(3, 4, 5)  # type: ignore[call-arg]
 
@@ -26,9 +26,19 @@ def test_create_from_3_ints_raises_error() -> None:
 def test_create_from_float_raises_error() -> None:
     """Test `IntVector2` can't be created with a `float`."""
     # arrange
-    # act
+    # act, assert
     with pytest.raises(TypeError):
         IntVector2(3.4, 5)  # type: ignore[arg-type]
+
+
+def test_create_zero_args() -> None:
+    """Test zero vector can be created from zero arguments."""
+    # arrange
+    # act
+    v = IntVector2()
+    # assert
+    assert v.x == 0
+    assert v.y == 0
 
 
 def test_create_from_kwargs() -> None:
@@ -41,7 +51,7 @@ def test_create_from_kwargs() -> None:
     assert v.y == 2
 
 
-def test_create_from_point() -> None:
+def test_from_point() -> None:
     """Test `IntVector2` can be created from 2-sequence of `int`s."""
     # arrange
     # act
@@ -53,26 +63,16 @@ def test_create_from_point() -> None:
     assert v1.y == v1.y == 2
 
 
-def test_create_from_3_sequence_raises_error() -> None:
-    """Test `IntVector2` can't be created from 3-sequence of `ints`."""
+def test_from_point_3_tuple_raises_error() -> None:
+    """Test `IntVector2` can't be created from 3-tuple `ints`."""
     # arrange
     # act
     with pytest.raises(TypeError):
         IntVector2.from_point((1, 2, 3))
 
 
-def test_create_zero_vector() -> None:
-    """Test zero vector can be created from zero arguments."""
-    # arrange
-    # act
-    v = IntVector2()
-    # assert
-    assert v.x == 0
-    assert v.y == 0
-
-
 def test_get_item() -> None:
-    """Test that ..."""
+    """Test that values can be accessed by index."""
     # arrange
     # act
     v = IntVector2(9, 10)
@@ -91,14 +91,22 @@ def test_add_int_vector2() -> None:
     assert v.y == 6
 
 
-def test_add_2_tuple() -> None:
-    """Test adding a 2-tuple."""
+def test_add_2_sequence() -> None:
+    """Test adding a pair of `int`s."""
     # arrange
     # act
     v = IntVector2(1, 2) + (3, 4)  # noqa: RUF005
     # assert
     assert v.x == 4
     assert v.y == 6
+
+
+def test_add_3_tuple_raises_error() -> None:
+    """Test adding a 3-sequence."""
+    # arrange
+    # act, assert
+    with pytest.raises(TypeError):
+        IntVector2(1, 2) + (3, 4, 5)  # noqa: RUF005
 
 
 def test_radd_2_tuple() -> None:
@@ -129,6 +137,14 @@ def test_sub_2_tuple() -> None:
     # assert
     assert v.x == -2
     assert v.y == -3
+
+
+def test_sub_3_tuple_raises_error() -> None:
+    """Test subtracting a 3-sequence."""
+    # arrange
+    # act, assert
+    with pytest.raises(TypeError):
+        IntVector2(1, 2) - (3, 4, 5)
 
 
 def test_rsub_2_tuple() -> None:

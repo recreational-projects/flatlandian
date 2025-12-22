@@ -79,18 +79,18 @@ class IntVector2:
         error_msg = f"IntVector2 index {key} out of range"
         raise IndexError(error_msg)
 
-    def __add__(self, other: IntVector2 | tuple[int, int]) -> IntVector2:
+    def __add__(self, other: IntPoint) -> IntVector2:
         _ensure_2_elements(other)
         return IntVector2(self.x + other[0], self.y + other[1])
 
-    def __radd__(self, other: tuple[int, int]) -> IntVector2:
+    def __radd__(self, other: IntPoint) -> IntVector2:
         return self + other
 
-    def __sub__(self, other: IntVector2 | tuple[int, int]) -> IntVector2:
+    def __sub__(self, other: IntPoint) -> IntVector2:
         _ensure_2_elements(other)
         return IntVector2(self.x - other[0], self.y - other[1])
 
-    def __rsub__(self, other: tuple[int, int]) -> IntVector2:
+    def __rsub__(self, other: IntPoint) -> IntVector2:
         _ensure_2_elements(other)
         return IntVector2(other[0] - self.x, other[1] - self.y)
 
