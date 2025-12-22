@@ -10,6 +10,8 @@ from pygame import Vector2
 if TYPE_CHECKING:
     from collections.abc import Sized
 
+    from pygame.typing import IntPoint
+
 
 def _ensure_2_elements(value: Sized) -> bool:
     if len(value) != 2:  # noqa: PLR2004
@@ -51,11 +53,8 @@ class IntVector2:
             raise TypeError(err_msg)
 
     @classmethod
-    def from_tuple(cls, value: tuple[int, int]) -> IntVector2:
-        """Construct vector from `tuple` of `int`s.
-
-        For compatibility with Pygame functions.
-        """
+    def from_point(cls, value: IntPoint) -> IntVector2:
+        """Construct `IntVector2` from `IntPoint` i.e. pair of `int`s."""
         _ensure_2_elements(value)
         return cls(value[0], value[1])
 
@@ -82,9 +81,6 @@ class IntVector2:
 
     def __add__(self, other: IntVector2 | tuple[int, int]) -> IntVector2:
         _ensure_2_elements(other)
-        if isinstance(other, IntVector2):
-            return IntVector2(self.x + other.x, self.y + other.y)
-
         return IntVector2(self.x + other[0], self.y + other[1])
 
     def __radd__(self, other: tuple[int, int]) -> IntVector2:
@@ -92,9 +88,6 @@ class IntVector2:
 
     def __sub__(self, other: IntVector2 | tuple[int, int]) -> IntVector2:
         _ensure_2_elements(other)
-        if isinstance(other, IntVector2):
-            return IntVector2(self.x - other.x, self.y - other.y)
-
         return IntVector2(self.x - other[0], self.y - other[1])
 
     def __rsub__(self, other: tuple[int, int]) -> IntVector2:

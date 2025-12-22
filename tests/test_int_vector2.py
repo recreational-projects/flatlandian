@@ -41,22 +41,24 @@ def test_create_from_kwargs() -> None:
     assert v.y == 2
 
 
-def test_create_from_2_tuple() -> None:
-    """Test `IntVector2` can be created from 2-tuple of `int`s."""
+def test_create_from_point() -> None:
+    """Test `IntVector2` can be created from 2-sequence of `int`s."""
     # arrange
     # act
-    v = IntVector2.from_tuple((1, 2))
+    v0 = IntVector2.from_point((1, 2))
+    v1 = IntVector2.from_point([1, 2])
+
     # assert
-    assert v.x == 1
-    assert v.y == 2
+    assert v0.x == v1.x == 1
+    assert v1.y == v1.y == 2
 
 
-def test_create_from_3_tuple_raises_error() -> None:
-    """Test `IntVector2` can't be created from 3-tuple of `ints`."""
+def test_create_from_3_sequence_raises_error() -> None:
+    """Test `IntVector2` can't be created from 3-sequence of `ints`."""
     # arrange
     # act
     with pytest.raises(TypeError):
-        IntVector2.from_tuple((1, 2, 3))  # type: ignore[arg-type]
+        IntVector2.from_point((1, 2, 3))
 
 
 def test_create_zero_vector() -> None:
