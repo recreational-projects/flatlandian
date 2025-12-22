@@ -9,7 +9,14 @@ and this project attempts to adhere to [Semantic Versioning](https://semver.org/
 
 ### Added
 
+- `IntVector2` indexing and thus `pygame.typing.IntPoint` compatibility
 - CI: run tests
+
+### Changed
+
+- Replaced `IntVector2.from_tuple()` with `IntVector2.from_point()`
+  which takes `pygame.typing.IntPoint`, i.e. a pair of integers
+- `IntVector2` add/subtract broadened to take `pygame.typing.IntPoint` 
 
 ### Fixed
 
