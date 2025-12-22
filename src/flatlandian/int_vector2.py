@@ -5,10 +5,12 @@ from __future__ import annotations
 from dataclasses import dataclass, fields
 from typing import TYPE_CHECKING
 
-from pygame import Vector2
+from pygame.math import Vector2
 
 if TYPE_CHECKING:
     from collections.abc import Sized
+
+    from pygame.typing import IntPoint
 
 
 def _ensure_2_elements(value: Sized) -> bool:
@@ -23,27 +25,39 @@ def _ensure_2_elements(value: Sized) -> bool:
 class IntVector2:
     """A 2-dimensional integer vector.
 
-    `IntVector2() -> IntVector2(0, 0)`
+    Supports `len` (always 2) and indexing.
+    Conforms to `pygame.typing.IntPoint`.
 
-    `IntVector2(x: int, y: int) -> IntVector2`
+    Constructors
+    ------------
+    ```
+    IntVector2() -> IntVector2(0, 0)
+    IntVector2(int, int) -> IntVector2
+    IntVector2(x: int, y: int) -> IntVector2
+    ```
 
-    `IntVector2(int, int) -> IntVector2`
+    Attempting to construct with `float` values raises `TypeError`.
 
-    Attempting to construct with `float` parameters raises `TypeError`.
+    Equivalents to these `pygame.math.Vector2` constructors aren't yet supported:
+    ```
+    Vector2(int) -> Vector2
+    Vector2(Vector2) -> Vector2
+    Vector2((x, y)) -> Vector2
+    ```
+    Arithmetic
+    ----------
+    Supports element-wise addition and subtraction of another
+    `IntVector2` or `pygame.typing.IntPoint` i.e. an `int` pair.
+    Returns `IntVector2`.
 
-    Equivalents to these `pygame.Vector2` constructors aren't yet supported:
-
-    `Vector2(int) -> Vector2`
-
-    `Vector2(Vector2) -> Vector2`
-
-    `Vector2((x, y)) -> Vector2`
+    Supports scalar multiplication and floor division by `int`.
+    Returns `IntVector2`.
     """
 
     x: int = 0
-    """x coordinate."""
+    """x coordinate. Also available via index 0 or -1."""
     y: int = 0
-    """y coordinate."""
+    """y coordinate. Also available via index 1 or -2."""
 
     def __post_init__(self) -> None:
         if not isinstance(self.x, int) or not isinstance(self.y, int):
@@ -51,17 +65,14 @@ class IntVector2:
             raise TypeError(err_msg)
 
     @classmethod
-    def from_tuple(cls, value: tuple[int, int]) -> IntVector2:
-        """Construct vector from `tuple` of `int`s.
-
-        For compatibility with Pygame functions.
-        """
+    def from_point(cls, value: IntPoint) -> IntVector2:
+        """Construct `IntVector2` from `pygame.typing.IntPoint`, i.e. an `int` pair."""
         _ensure_2_elements(value)
         return cls(value[0], value[1])
 
     @property
     def as_vector2(self) -> Vector2:
-        """Return `pygame.Vector2`, i.e. float coordinates.
+        """Return `pygame.math.Vector2`, i.e. float coordinates.
 
         For compatibility with Pygame functions.
         """
@@ -70,24 +81,28 @@ class IntVector2:
     def __len__(self) -> int:
         return len(fields(self))
 
-    def __add__(self, other: IntVector2 | tuple[int, int]) -> IntVector2:
-        _ensure_2_elements(other)
-        if isinstance(other, IntVector2):
-            return IntVector2(self.x + other.x, self.y + other.y)
+    def __getitem__(self, key: int) -> int:
+        if key in {0, -2}:
+            return self.x
 
+        if key in {1, -1}:
+            return self.y
+
+        error_msg = f"IntVector2 index {key} out of range"
+        raise IndexError(error_msg)
+
+    def __add__(self, other: IntPoint) -> IntVector2:
+        _ensure_2_elements(other)
         return IntVector2(self.x + other[0], self.y + other[1])
 
-    def __radd__(self, other: tuple[int, int]) -> IntVector2:
+    def __radd__(self, other: IntPoint) -> IntVector2:
         return self + other
 
-    def __sub__(self, other: IntVector2 | tuple[int, int]) -> IntVector2:
+    def __sub__(self, other: IntPoint) -> IntVector2:
         _ensure_2_elements(other)
-        if isinstance(other, IntVector2):
-            return IntVector2(self.x - other.x, self.y - other.y)
-
         return IntVector2(self.x - other[0], self.y - other[1])
 
-    def __rsub__(self, other: tuple[int, int]) -> IntVector2:
+    def __rsub__(self, other: IntPoint) -> IntVector2:
         _ensure_2_elements(other)
         return IntVector2(other[0] - self.x, other[1] - self.y)
 

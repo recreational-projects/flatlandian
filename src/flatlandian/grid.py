@@ -38,7 +38,7 @@ class Grid:
         }
 
     def is_in_bounds(self, cell: IntVector2) -> bool:
-        """Determine if cell is in bounds."""
+        """Determine if referenced cell is in bounds."""
         return (0 <= cell.x < self.size.x) and (0 <= cell.y < self.size.y)
 
     def neighbors(self, cell: IntVector2) -> set[IntVector2]:
