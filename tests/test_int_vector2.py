@@ -97,6 +97,17 @@ def test_get_item() -> None:
     assert v[1] == 10
 
 
+def test_iteration() -> None:
+    """Test that values can be unpacked, converted to tuple."""
+    # arrange
+    # act
+    v = IntVector2(1, 2)
+    # assert
+    assert[*v] == [1, 2]
+    assert tuple(v) == (1, 2)
+    assert [i for i in v] == [1, 2]
+
+
 def test_add_int_vector2() -> None:
     """Test adding another `IntVector2`."""
     # arrange
