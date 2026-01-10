@@ -13,6 +13,7 @@ def test_create_from_2_ints() -> None:
     # assert
     assert v.x == 1
     assert v.y == 2
+    assert v.xy == (1, 2)
 
 
 def test_create_from_3_ints_raises_error() -> None:
@@ -39,6 +40,8 @@ def test_create_zero_args() -> None:
     # assert
     assert v.x == 0
     assert v.y == 0
+    assert v.xy == (0, 0)
+
 
 
 def test_create_from_kwargs() -> None:
@@ -49,6 +52,7 @@ def test_create_from_kwargs() -> None:
     # assert
     assert v.x == 1
     assert v.y == 2
+    assert v.xy == (1, 2)
 
 
 def test_from_point() -> None:
@@ -95,6 +99,16 @@ def test_get_item() -> None:
     # assert
     assert v[0] == 9
     assert v[1] == 10
+
+
+def test_unpacking() -> None:
+    """Test that values can be unpacked, converted to tuple."""
+    # arrange
+    # act
+    v = IntVector2(1, 2)
+    # assert
+    assert[*v] == [1, 2]
+    assert tuple(v) == (1, 2)
 
 
 def test_add_int_vector2() -> None:
