@@ -13,6 +13,7 @@ def test_create_from_2_ints() -> None:
     # assert
     assert v.x == 1
     assert v.y == 2
+    assert v.xy == (1, 2)
 
 
 def test_create_from_3_ints_raises_error() -> None:
@@ -39,6 +40,7 @@ def test_create_zero_args() -> None:
     # assert
     assert v.x == 0
     assert v.y == 0
+    assert v.xy == (0, 0)
 
 
 def test_create_from_kwargs() -> None:
@@ -49,6 +51,7 @@ def test_create_from_kwargs() -> None:
     # assert
     assert v.x == 1
     assert v.y == 2
+    assert v.xy == (1, 2)
 
 
 def test_from_point() -> None:

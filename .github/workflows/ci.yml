@@ -41,5 +41,8 @@ jobs:
       # by default: exit with error if rule violations
       run: uv run ruff format
 
+    - name: Type checking with mypy
+      run: uv run mypy .
+
     - name: Test with pytest
       run: uv run pytest .
