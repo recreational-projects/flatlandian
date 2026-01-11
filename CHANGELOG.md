@@ -9,6 +9,7 @@ and this project attempts to adhere to [Semantic Versioning](https://semver.org/
 
 ### Added
 
+- `NavigationGrid` class
 - `IntVector2.__str__`, `__repr__` to match `pygame.math.Vector2`
 
 ## [0.1.4] - 2025-12-22
