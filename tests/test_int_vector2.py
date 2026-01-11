@@ -71,6 +71,31 @@ def test_from_point_3_tuple_raises_error() -> None:
         IntVector2.from_point((1, 2, 3))
 
 
+def test_repr() -> None:
+    # arrange
+    # act
+    v = IntVector2(x=1, y=2)
+    # assert
+    assert repr(v) == "IntVector2(1, 2)"
+
+
+def test_str() -> None:
+    # arrange
+    # act
+    v = IntVector2(x=1, y=2)
+    # assert
+    assert str(v) == "[1, 2]"
+
+
+def test_xy() -> None:
+    """Test `.xy` property."""
+    # arrange
+    # act
+    v = IntVector2(x=1, y=2)
+    # assert
+    assert v.xy == (1, 2)
+
+
 def test_get_item() -> None:
     """Test that values can be accessed by index."""
     # arrange
