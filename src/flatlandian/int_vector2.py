@@ -78,10 +78,6 @@ class IntVector2:
         """
         return Vector2(self.x, self.y)
 
-    @property
-    def xy(self) -> tuple[int, int]:
-        return self.x, self.y
-
     def __repr__(self) -> str:
         return self.__class__.__name__ + f"({self.x}, {self.y})"
 

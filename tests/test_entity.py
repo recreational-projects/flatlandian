@@ -1,6 +1,6 @@
 """Tests for `Entity` class."""
 
-from pygame import Vector2
+from pygame.math import Vector2
 
 from flatlandian.entity import Entity
 

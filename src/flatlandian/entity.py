@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from pygame import Vector2
+from pygame.math import Vector2
 
 
 @dataclass(eq=False, kw_only=True)

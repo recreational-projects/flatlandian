@@ -5,7 +5,7 @@ from __future__ import annotations
 from statistics import fmean
 from typing import TYPE_CHECKING
 
-from pygame import Vector2
+from pygame.math import Vector2
 
 from flatlandian.int_vector2 import IntVector2
 
