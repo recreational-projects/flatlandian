@@ -6,7 +6,7 @@ import random
 from dataclasses import InitVar, dataclass, field
 from typing import TYPE_CHECKING
 
-from pygame import Vector2
+from pygame.math import Vector2
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

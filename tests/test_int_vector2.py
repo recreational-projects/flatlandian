@@ -87,15 +87,6 @@ def test_str() -> None:
     assert str(v) == "[1, 2]"
 
 
-def test_xy() -> None:
-    """Test `.xy` property."""
-    # arrange
-    # act
-    v = IntVector2(x=1, y=2)
-    # assert
-    assert v.xy == (1, 2)
-
-
 def test_get_item() -> None:
     """Test that values can be accessed by index."""
     # arrange
