@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import itertools
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import ClassVar
 
 from flatlandian.int_vector2 import IntVector2
@@ -28,14 +28,14 @@ class Grid:
     ]
 
     size: IntVector2
+    cells: frozenset[IntVector2] = field(init=False, default_factory=frozenset)
+    """All potentially traversable nodes."""
 
-    @property
-    def cells(self) -> set[IntVector2]:
-        """Return all cells."""
-        return {
+    def __post_init__(self) -> None:
+        self.cells = frozenset(
             IntVector2(x, y)
             for x, y in itertools.product(range(self.size.x), range(self.size.y))
-        }
+        )
 
     def is_in_bounds(self, cell: IntVector2) -> bool:
         """Determine if referenced cell is in bounds."""

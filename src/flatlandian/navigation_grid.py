@@ -3,10 +3,13 @@
 from __future__ import annotations
 
 import heapq
+import math
 from dataclasses import dataclass, field
 
 from flatlandian.grid import Grid
 from flatlandian.int_vector2 import IntVector2
+
+_SQRT_2 = math.sqrt(2)
 
 
 @dataclass(kw_only=True)
@@ -57,7 +60,8 @@ class NavigationGrid(Grid):
     """Subset of `nodes` that cannot currently be traversed."""
 
     def __post_init__(self) -> None:
-        self.nodes = frozenset(cell for cell in self.cells)
+        super().__post_init__()
+        self.nodes = self.cells
 
     def is_traversable(self, node: IntVector2) -> bool:
         """Return `True` if the node is traversable, else `False`."""
@@ -73,24 +77,24 @@ class NavigationGrid(Grid):
 
         return reachable_neighbors
 
-    def _cost(self, from_cell: IntVector2, to_cell: IntVector2) -> float:
-        """Calculate the cost from cell to a neighbor.
+    def cost(self, from_node: IntVector2, to_node: IntVector2) -> float:
+        """Calculate the cost from node to a neighbor.
 
-        1 for cardinal, approx sqrt(2) for diagonal.
+        Always 1 for cardinal, sqrt(2) for diagonal.
         """
-        if to_cell not in self.neighbors(from_cell):
+        if to_node not in self.neighbors(from_node):
             err_msg = (
-                f"Can't calculate cost from {from_cell} to {to_cell}: not neighbors"
+                f"Can't calculate cost from {from_node} to {to_node}: not neighbors"
             )
             raise ValueError(err_msg)
 
-        dist = abs(from_cell.x - to_cell.x) + abs(from_cell.y - to_cell.y)
+        dist = abs(from_node.x - to_node.x) + abs(from_node.y - to_node.y)
         if dist == 2:  # noqa: PLR2004
-            return 1.41
+            return _SQRT_2
 
         return 1
 
-    def _uniform_cost_search(
+    def _search(
         self,
         start_node: IntVector2,
         goal_node: IntVector2,
@@ -107,9 +111,7 @@ class NavigationGrid(Grid):
                 break
 
             for new_node in self._reachable_neighbors(current_node):
-                new_cost = cost_so_far[current_node] + self._cost(
-                    current_node, new_node
-                )
+                new_cost = cost_so_far[current_node] + self.cost(current_node, new_node)
                 if (
                     new_node not in came_from or new_cost < cost_so_far[new_node]
                     # add new_node to frontier if cheaper
@@ -122,17 +124,17 @@ class NavigationGrid(Grid):
 
     def route(
         self,
-        from_cell: IntVector2,
-        to_cell: IntVector2,
+        from_node: IntVector2,
+        to_node: IntVector2,
         algorithm: str = "UNIFORM_COST_SEARCH",
     ) -> list[IntVector2] | None:
-        """Return a node-based route from `from_cell` to `to_cell`.
+        """Return a node-based route from `from_node` to `to_node`.
 
         Returns:
         --------
         `list[IntVector2]`:
-            Cells on the route `to_cell`.
-            Includes `to_cell`; doesn't include `from_cell`.
+            Nodes on the route `to_node`.
+            Includes `to_node`; doesn't include `from_node`.
 
         `None`:
             if no route was found.
@@ -142,18 +144,18 @@ class NavigationGrid(Grid):
             err_msg = f"Algorithm {algorithm} not implemented."
             raise NotImplementedError(err_msg)
 
-        came_from = self._uniform_cost_search(from_cell, to_cell)
+        came_from = self._search(from_node, to_node)
 
-        # Construct cell path starting at `to_cell` and retracing toward `from_cell`...
-        path_from_goal = [to_cell]
-        current_cell = to_cell
+        # Construct node path starting at `to_node` and retracing toward `from_node`...
+        path_from_goal = [to_node]
+        current_node = to_node
 
-        while current_cell != from_cell:
-            came_from_node = came_from.get(current_cell)
+        while current_node != from_node:
+            came_from_node = came_from.get(current_node)
             if came_from_node is None:
                 return None
 
-            current_cell = came_from_node
-            path_from_goal.append(current_cell)
+            current_node = came_from_node
+            path_from_goal.append(current_node)
 
         return list(reversed(path_from_goal))

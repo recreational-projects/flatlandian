@@ -15,6 +15,7 @@ def test_create() -> None:
         IntVector2(1, 0),
         IntVector2(1, 1),
     }
+    assert isinstance(grid.cells, frozenset)
 
 
 def test_neighbors() -> None:

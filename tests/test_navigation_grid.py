@@ -15,3 +15,5 @@ def test_create() -> None:
         IntVector2(1, 0),
         IntVector2(1, 1),
     }
+    assert isinstance(ng.nodes, frozenset)
+    assert ng.blocked_nodes == set()
