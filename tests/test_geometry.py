@@ -1,7 +1,19 @@
 """Tests for `geometry` module."""
 
+from pygame.math import Vector2
+
 from flatlandian import geometry
 from flatlandian.grid import Grid
+
+
+def test_mean_vector() -> None:
+    """Test that mean vector can be derived."""
+    # arrange
+    vecs = [Vector2(1, 1), Vector2(-2, 2), Vector2(2, 3), Vector2(2, 0)]
+    # act
+    mean = geometry.mean_vector(vecs)
+    # assert
+    assert mean == Vector2(0.75, 1.5)
 
 
 def test_absolute_bearing__vector2() -> None:

@@ -16,6 +16,8 @@ def test_create() -> None:
     assert e.acceleration is None
     assert e.radius == 10
     assert e.name is None
+    assert e.heading == 90
+    assert e.speed == 0
     assert (
         repr(e) == "Entity("
         "position=Vector2(0, 0), "
@@ -50,6 +52,15 @@ def test_create_optional_fields() -> None:
         "radius=2, "
         "name='test')"
     )
+
+
+def test_speed() -> None:
+    """Test `Entity` speed."""
+    # arrange
+    # act
+    e = Entity(position=Vector2(), velocity=Vector2(-3, 4))
+    # assert
+    assert e.speed == 5
 
 
 def test_move() -> None:
