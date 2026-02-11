@@ -109,6 +109,39 @@ def test_get_item() -> None:
     assert v[1] == 10
 
 
+def test_iteration() -> None:
+    """Test that values can be iterated over."""
+    # arrange
+    v = IntVector2(1, 2)
+    # act
+    values = []
+    for i in v:
+        values.append(i)  # noqa: PERF402
+
+    # assert
+    assert values == [1, 2]
+
+
+def test_unpacking() -> None:
+    """Test that values can be unpacked."""
+    # arrange
+    v = IntVector2(3, 4)
+    # act
+    values = [*v]
+    # assert
+    assert values == [3, 4]
+
+
+def test_tuple() -> None:
+    """Test conversion to tuple."""
+    # arrange
+    v = IntVector2(5, 6)
+    # act
+    values = tuple(v)
+    # assert
+    assert values == (5, 6)
+
+
 def test_add_int_vector2() -> None:
     """Test adding another `IntVector2`."""
     # arrange
