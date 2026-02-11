@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Literal
 
-from attrs import define, field, fields, validators
+from attrs import define, field, validators
 from pygame.math import Vector2
 
 if TYPE_CHECKING:
-    from collections.abc import Sized
+    from collections.abc import Iterator, Sized
 
     from pygame.typing import IntPoint
 
@@ -18,7 +18,7 @@ class IntVector2:
     """A 2-dimensional integer vector.
 
     Frozen and hashable (unlike pygame.Vector2).
-    Supports `len` (always 2) and indexing.
+    Supports `len()` (always 2), iteration and indexing.
     Conforms to `pygame.typing.IntPoint`.
 
     Constructors
@@ -68,8 +68,12 @@ class IntVector2:
     def __str__(self) -> str:
         return f"[{self.x}, {self.y}]"
 
-    def __len__(self) -> int:
-        return len(fields(self))
+    def __len__(self) -> Literal[2]:
+        return 2
+
+    def __iter__(self) -> Iterator[int]:
+        yield self.x
+        yield self.y
 
     def __getitem__(self, key: int) -> int:
         if key in {0, -2}:
