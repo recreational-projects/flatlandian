@@ -16,7 +16,7 @@ dev = [
     "pdoc>=16.0.0",
     "pre-commit>=4.5.0",
     "pytest>=9.0.2",
-    "ruff>=0.14.14",
+    "ruff>=0.15.0",
 ]
 
 [tool.mypy]
@@ -28,6 +28,7 @@ show_error_codes = true
 pretty = true
 
 [tool.ruff.lint]
+future-annotations = true
 select = ["ALL"]
 ignore = [
     "COM812",  # missing-trailing-comma: conflicts with ruff formatter

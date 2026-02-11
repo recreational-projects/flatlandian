@@ -1,8 +1,7 @@
 """Contains `Entity` class."""
 
-from __future__ import annotations
-
 from dataclasses import dataclass
+from typing import Self
 
 from pygame.math import Vector2
 
@@ -31,7 +30,7 @@ class Entity:
         """Return speed from velocity."""
         return self.velocity.magnitude()
 
-    def distance_to_squared(self: Entity, other: Entity) -> float:
+    def distance_to_squared(self: Self, other: Self) -> float:
         """Return square of distance between self and other."""
         return (other.position - self.position).magnitude_squared()
 

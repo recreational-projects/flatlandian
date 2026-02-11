@@ -1,10 +1,9 @@
 """Contains `NavigationGrid` class and supporting code."""
 
-from __future__ import annotations
-
 import heapq
 import math
 from dataclasses import dataclass, field
+from typing import Self
 
 from flatlandian.grid import Grid
 from flatlandian.int_vector2 import IntVector2
@@ -22,7 +21,7 @@ class _PrioritisedNode:
     node: IntVector2
     priority: float
 
-    def __lt__(self, other: _PrioritisedNode) -> bool:
+    def __lt__(self, other: Self) -> bool:
         """Determine priority for `heapq`."""
         return self.priority < other.priority
 
