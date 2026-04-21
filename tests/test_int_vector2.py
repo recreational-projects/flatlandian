@@ -5,7 +5,7 @@ import pytest
 from flatlandian.int_vector2 import IntVector2
 
 
-def test_create_from_2_ints() -> None:
+def test_create_from_ints() -> None:
     """Test `IntVector2` can be created from 2 `ints`."""
     # arrange
     # act
@@ -13,7 +13,16 @@ def test_create_from_2_ints() -> None:
     # assert
     assert v.x == 1
     assert v.y == 2
-    assert v.xy == (1, 2)
+
+
+def test_create_from_kwargs() -> None:
+    """Test `IntVector2` can be created from `x` and `y` keyword `int`s."""
+    # arrange
+    # act
+    v = IntVector2(x=1, y=2)
+    # assert
+    assert v.x == 1
+    assert v.y == 2
 
 
 def test_create_from_3_ints_raises_error() -> None:
@@ -21,6 +30,9 @@ def test_create_from_3_ints_raises_error() -> None:
     # arrange
     # act, assert
     with pytest.raises(TypeError):
+        # currently raises built-in message:
+        # "`IntVector2.__init__() takes from 1 to 3 positional arguments
+        # but 4 were given"
         IntVector2(3, 4, 5)  # type: ignore[call-arg]
 
 
@@ -28,7 +40,7 @@ def test_create_from_float_raises_error() -> None:
     """Test `IntVector2` can't be created with a `float`."""
     # arrange
     # act, assert
-    with pytest.raises(TypeError):
+    with pytest.raises(TypeError, match="must be <class 'int'>"):
         IntVector2(3.4, 5)  # type: ignore[arg-type]
 
 
@@ -40,18 +52,6 @@ def test_create_zero_args() -> None:
     # assert
     assert v.x == 0
     assert v.y == 0
-    assert v.xy == (0, 0)
-
-
-def test_create_from_kwargs() -> None:
-    """Test `IntVector2` can be created from `x` and `y` keyword `int`s."""
-    # arrange
-    # act
-    v = IntVector2(x=1, y=2)
-    # assert
-    assert v.x == 1
-    assert v.y == 2
-    assert v.xy == (1, 2)
 
 
 def test_from_point() -> None:
@@ -88,6 +88,14 @@ def test_str() -> None:
     v = IntVector2(x=1, y=2)
     # assert
     assert str(v) == "[1, 2]"
+
+
+def test_len() -> None:
+    # arrange
+    # act
+    v = IntVector2(x=3, y=4)
+    # assert
+    assert len(v) == 2
 
 
 def test_get_item() -> None:

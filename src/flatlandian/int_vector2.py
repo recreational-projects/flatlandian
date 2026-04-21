@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, fields
 from typing import TYPE_CHECKING
 
+from attrs import define, field, fields, validators
 from pygame.math import Vector2
 
 if TYPE_CHECKING:
@@ -14,6 +14,7 @@ if TYPE_CHECKING:
 
 
 def _ensure_2_elements(value: Sized) -> bool:
+    """Used in arithmetic operations, not constructors."""
     if len(value) != 2:  # noqa: PLR2004
         err_msg = f"Expected 2 elements, got {len(value)}: {value}"
         raise TypeError(err_msg)
@@ -21,10 +22,11 @@ def _ensure_2_elements(value: Sized) -> bool:
     return True
 
 
-@dataclass(frozen=True)
+@define(frozen=True)
 class IntVector2:
     """A 2-dimensional integer vector.
 
+    Frozen and hashable (unlike pygame.Vector2).
     Supports `len` (always 2) and indexing.
     Conforms to `pygame.typing.IntPoint`.
 
@@ -36,7 +38,7 @@ class IntVector2:
     IntVector2(x: int, y: int) -> IntVector2
     ```
 
-    Attempting to construct with `float` values raises `TypeError`.
+    Attempting to construct with non-`int` values raises `TypeError`.
 
     Equivalents to these `pygame.math.Vector2` constructors aren't yet supported:
     ```
@@ -46,42 +48,28 @@ class IntVector2:
     ```
     Arithmetic
     ----------
-    Supports element-wise addition and subtraction of another
-    `IntVector2` or `pygame.typing.IntPoint` i.e. an `int` pair.
+    Supports element-wise addition and subtraction of another `IntVector2`
+    or `pygame.typing.IntPoint` i.e. a sequence-like of 2 `int`s.
     Returns `IntVector2`.
 
     Supports scalar multiplication and floor division by `int`.
     Returns `IntVector2`.
     """
 
-    x: int = 0
+    x: int = field(default=0, validator=validators.instance_of(int))
     """x coordinate. Also available via index 0 or -1."""
-    y: int = 0
-    """y coordinate. Also available via index 1 or -2."""
 
-    def __post_init__(self) -> None:
-        if not isinstance(self.x, int) or not isinstance(self.y, int):
-            err_msg = f"Expected 2 `int`s; got x={self.x}, y={self.y}"  # type: ignore[unreachable]
-            raise TypeError(err_msg)
+    y: int = field(default=0, validator=validators.instance_of(int))
+    """y coordinate. Also available via index 1 or -2."""
 
     @classmethod
     def from_point(cls, value: IntPoint) -> IntVector2:
-        """Construct `IntVector2` from `pygame.typing.IntPoint`, i.e. an `int` pair."""
+        """Construct `IntVector2` from a sequence of two `int`s.
+
+        TODO: Re-implement in IntVector2().`
+        """
         _ensure_2_elements(value)
         return cls(value[0], value[1])
-
-    @property
-    def as_vector2(self) -> Vector2:
-        """Return `pygame.math.Vector2`, i.e. float coordinates.
-
-        For compatibility with Pygame functions.
-        """
-        return Vector2(self.x, self.y)
-
-    @property
-    def xy(self) -> tuple[int, int]:
-        """Return tuple."""
-        return self.x, self.y
 
     def __repr__(self) -> str:
         return self.__class__.__name__ + f"({self.x}, {self.y})"
@@ -125,3 +113,16 @@ class IntVector2:
 
     def __floordiv__(self, other: int) -> IntVector2:
         return IntVector2(self.x // other, self.y // other)
+
+    @property
+    def as_vector2(self) -> Vector2:
+        """Return `pygame.math.Vector2`, i.e. float coordinates.
+
+        For compatibility with Pygame functions.
+        """
+        return Vector2(self.x, self.y)
+
+    @property
+    def xy(self) -> tuple[int, int]:
+        """Return tuple."""
+        return self.x, self.y
