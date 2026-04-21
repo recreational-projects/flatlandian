@@ -3,6 +3,7 @@ name = "flatlandian"
 version = "0.2.2"
 requires-python = ">=3.12"
 dependencies = [
+    "attrs>=26.1.0",
     "pygame-ce>=2.5.5",
 ]
 
@@ -16,7 +17,7 @@ dev = [
     "pdoc>=16.0.0",
     "pre-commit>=4.5.0",
     "pytest>=9.0.3",
-    "ruff>=0.15.10",
+    "ruff>=0.15.11",
 ]
 
 [tool.mypy]
@@ -48,6 +49,10 @@ extend-safe-fixes = [
     "S101",  # assert
     "PLR2004",  # magic-value-comparison
 ]
+"int_vector2.py" = [
+    "ANN401", # any-type
+]
+
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
