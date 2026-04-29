@@ -1,12 +1,17 @@
 """Contains `NavigationGrid` class and supporting code."""
 
+from __future__ import annotations
+
 import heapq
 import math
 from dataclasses import dataclass, field
-from typing import Self
+from typing import TYPE_CHECKING, Self
 
 from flatlandian.grid import Grid
 from flatlandian.int_vector2 import IntVector2
+
+if TYPE_CHECKING:
+    from collections.abc import Set as AbstractSet
 
 _SQRT_2 = math.sqrt(2)
 
@@ -67,8 +72,11 @@ class NavigationGrid(Grid):
         from_node: IntVector2,
         to_node: IntVector2,
         algorithm: str = "UNIFORM_COST_SEARCH",
+        exclude_nodes: AbstractSet[IntVector2] | None = None,
     ) -> list[IntVector2] | None:
         """Return a node-based route from `from_node` to `to_node`.
+
+        Optionally, `exclude_nodes` can be provided to exclude them from the route.
 
         Returns:
         --------
@@ -84,7 +92,7 @@ class NavigationGrid(Grid):
             err_msg = f"Algorithm {algorithm} not implemented."
             raise NotImplementedError(err_msg)
 
-        came_from = self._search(from_node, to_node)
+        came_from = self._search(from_node, to_node, exclude_nodes=exclude_nodes)
 
         # Construct node path starting at `to_node` and retracing toward `from_node`...
         path_from_goal = [to_node]
@@ -104,6 +112,7 @@ class NavigationGrid(Grid):
         self,
         start_node: IntVector2,
         goal_node: IntVector2,
+        exclude_nodes: AbstractSet[IntVector2] | None = None,
     ) -> dict[IntVector2, IntVector2 | None]:
         came_from: dict[IntVector2, IntVector2 | None] = {start_node: None}
         cost_so_far: dict[IntVector2, float] = {start_node: 0}
@@ -116,7 +125,11 @@ class NavigationGrid(Grid):
             if current_node == goal_node:  # early exit
                 break
 
-            for new_node in self._reachable_neighbors(current_node):
+            routable_nodes_ = self._reachable_neighbors(current_node)
+            if exclude_nodes:
+                routable_nodes_ -= exclude_nodes
+
+            for new_node in routable_nodes_:
                 new_cost = cost_so_far[current_node] + self.cost(current_node, new_node)
                 if (
                     new_node not in came_from or new_cost < cost_so_far[new_node]
