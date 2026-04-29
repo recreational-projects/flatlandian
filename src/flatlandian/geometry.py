@@ -44,17 +44,6 @@ def relative_bearing(bearing1: float, bearing2: float) -> float:
     return 180 if bearing == -180 else bearing  # noqa: PLR2004
 
 
-def cells_in_rect(rect: Rect) -> set[IntVector2]:
-    """Return all cells in `rect`."""
-    return {
-        IntVector2(x, y)
-        for x, y in itertools.product(
-            range(rect.left, rect.right),
-            range(rect.top, rect.bottom),
-        )
-    }
-
-
 def cells_in_circle(*, center: IntVector2, radius: int) -> set[IntVector2]:
     """Return all cells in the circle."""
     rect = Rect(center.x - radius, center.y - radius, radius * 2, radius * 2).inflate(
@@ -64,4 +53,15 @@ def cells_in_circle(*, center: IntVector2, radius: int) -> set[IntVector2]:
         cell
         for cell in cells_in_rect(rect)
         if (cell - center).as_vector2.length_squared() < radius**2
+    }
+
+
+def cells_in_rect(rect: Rect) -> set[IntVector2]:
+    """Return all cells in `rect`."""
+    return {
+        IntVector2(x, y)
+        for x, y in itertools.product(
+            range(rect.left, rect.right),
+            range(rect.top, rect.bottom),
+        )
     }

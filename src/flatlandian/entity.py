@@ -41,13 +41,13 @@ class Entity:
 
         self.velocity = Vector2(0, 0)
 
+    def update(self, delta_time: float) -> None:
+        """Update the entity."""
+        self.move(delta_time)
+
     def move(self, delta_time: float) -> None:
         """Move the entity over `delta time`."""
         if self.acceleration:
             self.velocity += self.acceleration * delta_time
 
         self.position += self.velocity * delta_time
-
-    def update(self, delta_time: float) -> None:
-        """Update the entity."""
-        self.move(delta_time)

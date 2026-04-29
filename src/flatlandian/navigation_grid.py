@@ -62,65 +62,6 @@ class NavigationGrid(Grid):
         super().__post_init__()
         self.nodes = self.cells
 
-    def is_traversable(self, node: IntVector2) -> bool:
-        """Return `True` if the node is traversable, else `False`."""
-        return node in self.nodes and node not in self.blocked_nodes
-
-    def _reachable_neighbors(self, node: IntVector2) -> set[IntVector2]:
-        """Return `node`'s reachable (by movement) neighbors."""
-        reachable_neighbors: set[IntVector2] = set()
-        for dir_ in Grid.DIRECTIONS:
-            neighbor = IntVector2(node.x + dir_.x, node.y + dir_.y)
-            if self.is_traversable(neighbor):
-                reachable_neighbors.add(neighbor)
-
-        return reachable_neighbors
-
-    def cost(self, from_node: IntVector2, to_node: IntVector2) -> float:
-        """Calculate the cost from node to a neighbor.
-
-        Always 1 for cardinal, sqrt(2) for diagonal.
-        """
-        if to_node not in self.neighbors(from_node):
-            err_msg = (
-                f"Can't calculate cost from {from_node} to {to_node}: not neighbors"
-            )
-            raise ValueError(err_msg)
-
-        dist = abs(from_node.x - to_node.x) + abs(from_node.y - to_node.y)
-        if dist == 2:  # noqa: PLR2004
-            return _SQRT_2
-
-        return 1
-
-    def _search(
-        self,
-        start_node: IntVector2,
-        goal_node: IntVector2,
-    ) -> dict[IntVector2, IntVector2 | None]:
-        came_from: dict[IntVector2, IntVector2 | None] = {start_node: None}
-        cost_so_far: dict[IntVector2, float] = {start_node: 0}
-        frontier: _PriorityQueue = _PriorityQueue()
-        frontier.put(0, start_node)
-
-        while not frontier.is_empty:
-            current_node = frontier.get()
-
-            if current_node == goal_node:  # early exit
-                break
-
-            for new_node in self._reachable_neighbors(current_node):
-                new_cost = cost_so_far[current_node] + self.cost(current_node, new_node)
-                if (
-                    new_node not in came_from or new_cost < cost_so_far[new_node]
-                    # add new_node to frontier if cheaper
-                ):
-                    cost_so_far[new_node] = new_cost
-                    frontier.put(priority=new_cost, node=new_node)
-                    came_from[new_node] = current_node
-
-        return came_from
-
     def route(
         self,
         from_node: IntVector2,
@@ -158,3 +99,62 @@ class NavigationGrid(Grid):
             path_from_goal.append(current_node)
 
         return list(reversed(path_from_goal))
+
+    def _search(
+        self,
+        start_node: IntVector2,
+        goal_node: IntVector2,
+    ) -> dict[IntVector2, IntVector2 | None]:
+        came_from: dict[IntVector2, IntVector2 | None] = {start_node: None}
+        cost_so_far: dict[IntVector2, float] = {start_node: 0}
+        frontier: _PriorityQueue = _PriorityQueue()
+        frontier.put(0, start_node)
+
+        while not frontier.is_empty:
+            current_node = frontier.get()
+
+            if current_node == goal_node:  # early exit
+                break
+
+            for new_node in self._reachable_neighbors(current_node):
+                new_cost = cost_so_far[current_node] + self.cost(current_node, new_node)
+                if (
+                    new_node not in came_from or new_cost < cost_so_far[new_node]
+                    # add new_node to frontier if cheaper
+                ):
+                    cost_so_far[new_node] = new_cost
+                    frontier.put(priority=new_cost, node=new_node)
+                    came_from[new_node] = current_node
+
+        return came_from
+
+    def _reachable_neighbors(self, node: IntVector2) -> set[IntVector2]:
+        """Return `node`'s reachable (by movement) neighbors."""
+        reachable_neighbors: set[IntVector2] = set()
+        for dir_ in Grid.DIRECTIONS:
+            neighbor = IntVector2(node.x + dir_.x, node.y + dir_.y)
+            if self.is_traversable(neighbor):
+                reachable_neighbors.add(neighbor)
+
+        return reachable_neighbors
+
+    def is_traversable(self, node: IntVector2) -> bool:
+        """Return `True` if the node is traversable, else `False`."""
+        return node in self.nodes and node not in self.blocked_nodes
+
+    def cost(self, from_node: IntVector2, to_node: IntVector2) -> float:
+        """Calculate the cost from node to a neighbor.
+
+        Always 1 for cardinal, sqrt(2) for diagonal.
+        """
+        if to_node not in self.neighbors(from_node):
+            err_msg = (
+                f"Can't calculate cost from {from_node} to {to_node}: not neighbors"
+            )
+            raise ValueError(err_msg)
+
+        dist = abs(from_node.x - to_node.x) + abs(from_node.y - to_node.y)
+        if dist == 2:  # noqa: PLR2004
+            return _SQRT_2
+
+        return 1

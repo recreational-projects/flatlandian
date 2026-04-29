@@ -35,11 +35,11 @@ class Grid:
             for x, y in itertools.product(range(self.size.x), range(self.size.y))
         )
 
-    def is_in_bounds(self, cell: IntVector2) -> bool:
-        """Determine if `cell` is in `Grid` bounds."""
-        return (0 <= cell.x < self.size.x) and (0 <= cell.y < self.size.y)
-
     def neighbors(self, cell: IntVector2) -> set[IntVector2]:
         """Return the neighbors of `cell`, constrained to `Grid`."""
         neighbors = {cell + offset for offset in Grid.DIRECTIONS}
         return {cell for cell in neighbors if self.is_in_bounds(cell)}
+
+    def is_in_bounds(self, cell: IntVector2) -> bool:
+        """Determine if `cell` is in `Grid` bounds."""
+        return (0 <= cell.x < self.size.x) and (0 <= cell.y < self.size.y)
