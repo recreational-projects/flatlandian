@@ -13,15 +13,6 @@ if TYPE_CHECKING:
     from pygame.typing import IntPoint
 
 
-def _ensure_2_elements(value: Sized) -> bool:
-    """Used in arithmetic operations, not constructors."""
-    if len(value) != 2:  # noqa: PLR2004
-        err_msg = f"Expected 2 elements, got {len(value)}: {value}"
-        raise TypeError(err_msg)
-
-    return True
-
-
 @define(frozen=True)
 class IntVector2:
     """A 2-dimensional integer vector.
@@ -126,3 +117,12 @@ class IntVector2:
     def xy(self) -> tuple[int, int]:
         """Return tuple."""
         return self.x, self.y
+
+
+def _ensure_2_elements(value: Sized) -> bool:
+    """Used in arithmetic operations, not constructors."""
+    if len(value) != 2:  # noqa: PLR2004
+        err_msg = f"Expected 2 elements, got {len(value)}: {value}"
+        raise TypeError(err_msg)
+
+    return True
