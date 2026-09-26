@@ -2,8 +2,10 @@
 
 A small 2d library to support other projects.
 
-Uses [pygame-ce](https://pyga.me/)'s
-[Vector2](https://pyga.me/docs/ref/math.html#pygame.math.Vector2) class.
+Uses [vec](https://github.com/larryhastings/vec)'s
+`vec.Vector2` class.
+
+Pygame is only used for `pygame.typing.IntPoint` generic type.
 
 ## Add to a project
 
