@@ -5,7 +5,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Literal
 
 from attrs import define, field, validators
-from pygame.math import Vector2
+
+import vec
 
 if TYPE_CHECKING:
     from collections.abc import Iterator, Sized
@@ -110,12 +111,12 @@ class IntVector2:
         return IntVector2(self.x // other, self.y // other)
 
     @property
-    def as_vector2(self) -> Vector2:
-        """Return `pygame.math.Vector2`, i.e. float coordinates.
+    def as_vector2(self) -> vec.Vector2:
+        """Return `vec.Vector2`, i.e. float coordinates.
 
         For compatibility with Pygame functions.
         """
-        return Vector2(self.x, self.y)
+        return vec.Vector2(self.x, self.y)
 
     @property
     def xy(self) -> tuple[int, int]:
