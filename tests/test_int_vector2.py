@@ -1,8 +1,8 @@
 """Tests for `IntVector2` class."""
 
 import pytest
-from pygame import Vector2
 
+import vec
 from flatlandian.int_vector2 import IntVector2
 
 
@@ -239,17 +239,17 @@ def test_rmul() -> None:
 
 
 def test_as_vector2() -> None:
-    """Test `IntVector2` can be converted to `Vector2`."""
+    """Test `IntVector2` can be converted to `vec.Vector2`."""
     # arrange
     v = IntVector2(9, 10)
     # act
     v2 = v.as_vector2
     # assert
-    assert v2 == Vector2(9, 10)
+    assert v2 == vec.Vector2(9, 10)
 
 
 def test_xy() -> None:
-    """Test `IntVector2` can be converted to `Vector2`."""
+    """Test `IntVector2` can be converted to `vec.Vector2`."""
     # arrange
     v = IntVector2(9, 10)
     # act

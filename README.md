@@ -2,8 +2,9 @@
 
 A small 2d library to support other projects.
 
-Uses [pygame-ce](https://pyga.me/)'s
-[Vector2](https://pyga.me/docs/ref/math.html#pygame.math.Vector2) class.
+Uses:
+* [larryhastings/vec](https://github.com/larryhastings/vec)'s `Vector2` class.
+* [pygame-ce](https://pyga.me/)'s [`Rect`](https://pyga.me/docs/ref/rect) class.
 
 ## Add to a project
 

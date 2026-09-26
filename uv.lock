@@ -61,6 +61,7 @@ source = { editable = "." }
 dependencies = [
     { name = "attrs" },
     { name = "pygame-ce" },
+    { name = "vec" },
 ]
 
 [package.dev-dependencies]
@@ -76,6 +77,7 @@ dev = [
 requires-dist = [
     { name = "attrs", specifier = ">=26.1.0" },
     { name = "pygame-ce", specifier = ">=2.5.8" },
+    { name = "vec", specifier = ">=0.7.1" },
 ]
 
 [package.metadata.requires-dev]
@@ -417,6 +419,24 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/0a/e8/1e186578076aff7a80735f625005fde678412ab609cd323ed182eb7d6b87/ruff-0.17.1-py3-none-win32.whl", hash = "sha256:1de0030a8aa78c65c5fecb84b2e5c390ac684c0452875a02afc7c083d49a496a", size = 9895093, upload-time = "2026-10-15T15:23:10.582Z" },
     { url = "https://files.pythonhosted.org/packages/6a/2e/da3d9589bae8e8b58f3a48bd5bc0b980232fb14a83bf02c3be7660f87c1b/ruff-0.17.1-py3-none-win_amd64.whl", hash = "sha256:5df76f16580fab58d0f6c98a3ac254a4abceb7b2489b8b678335869cff77b3d7", size = 10097955, upload-time = "2026-10-15T15:23:13.309Z" },
     { url = "https://files.pythonhosted.org/packages/df/c9/0f2a4dea06a5e12c1191ee3d96b1e1233797d0d5e18f97a2b909a95a9836/ruff-0.17.1-py3-none-win_arm64.whl", hash = "sha256:42400b9a6ff8515ff27796f07f92e0195be011c86e81e381606f58ea5502fef4", size = 9853542, upload-time = "2026-10-15T15:23:16.05Z" },
+]
+
+[[package]]
+name = "typing-extensions"
+version = "4.16.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f6/cc/6253133b5bb138fc3306cebfbda2c520f545d36b5be2c7255cc528bb45d6/typing_extensions-4.16.0.tar.gz", hash = "sha256:dc983d19a509c94dba722ee6abd33940f7c05a89e243c47e907eb4db6f1a43e5", size = 113555, upload-time = "2026-07-02T08:40:05.92Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl", hash = "sha256:481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8", size = 45571, upload-time = "2026-07-02T08:40:04.659Z" },
+]
+
+[[package]]
+name = "vec"
+version = "0.7.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/1b/4b/0390380ed6f0ee3ad20b89cd0c45c34d6b92202903a3c57ec15513883f30/vec-0.7.1.tar.gz", hash = "sha256:afec651b457dba6afae810f409315f587305310e5297af5d7326f8191df24d17", size = 32969, upload-time = "2024-09-16T01:39:49.889Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/51/74/cd1ff87cd5703acdcab829f6a419b01d74ef0097da70cefd7f722e2c36da/vec-0.7.1-py3-none-any.whl", hash = "sha256:3e77bffee2884b7151a4a200e38c60d8a80cc1c4dd0e1f44d3249bf3a2eea33b", size = 17744, upload-time = "2024-09-16T01:39:48.059Z" },
 ]
 
 [[package]]

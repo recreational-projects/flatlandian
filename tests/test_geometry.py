@@ -1,9 +1,8 @@
 """Tests for `geometry` module."""
 
-from pygame.math import Vector2
-
 from flatlandian import geometry
 from flatlandian.grid import Grid
+from vec import Vector2
 
 
 def test_mean_vector() -> None:
