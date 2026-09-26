@@ -3,24 +3,25 @@
 from __future__ import annotations
 
 import itertools
+from math import pi, tau
 from statistics import fmean
 from typing import TYPE_CHECKING
 
 from pygame import Rect
-from pygame.math import Vector2
 
+import vec
 from flatlandian.int_vector2 import IntVector2
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
 
-def mean_vector(vec2s: Iterable[Vector2]) -> Vector2:
+def mean_vector(vec2s: Iterable[vec.Vector2]) -> vec.Vector2:
     """Return mean vector of `vec2s`."""
-    return Vector2(fmean(vec.x for vec in vec2s), fmean(vec.y for vec in vec2s))
+    return vec.Vector2(fmean(v.x for v in vec2s), fmean(v.y for v in vec2s))
 
 
-def absolute_bearing(vec2: Vector2 | IntVector2) -> float:
+def absolute_bearing(vec2: vec.Vector2 | IntVector2) -> float:
     """Return 0 <= degrees < 360, from +ve y-axis in direction of +ve x-axis.
 
     Clockwise in a conventional system (+x right, +y up).
@@ -30,7 +31,7 @@ def absolute_bearing(vec2: Vector2 | IntVector2) -> float:
     if isinstance(vec2, IntVector2):
         vec2 = vec2.as_vector2
 
-    return (90 - vec2.angle) % 360
+    return (pi / 2 - vec2.theta) % tau * 180 / pi
 
 
 def relative_bearing(bearing1: float, bearing2: float) -> float:
@@ -52,7 +53,7 @@ def cells_in_circle(*, center: IntVector2, radius: int) -> set[IntVector2]:
     return {
         cell
         for cell in cells_in_rect(rect)
-        if (cell - center).as_vector2.length_squared() < radius**2
+        if (cell - center).as_vector2.length_squared < radius**2
     }
 
 
