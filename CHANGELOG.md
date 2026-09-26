@@ -3,30 +3,37 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
-and this project attempts to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+and this project attempts to adhere
+to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.2.3] - 2025-04-21
+## [0.2.4] - 2026-09-26
+
+- build: locking resolution mode → lowest-direct
+- Docs: improve README
+- Tests: improve coverage
+
+## [0.2.3] - 2026-04-21
 
 ### Added
 
-- `IntVector2` uses attrs, improving validation 
+- `IntVector2` uses attrs, improving validation
 - `IntVector2.xy` property
-- tests: improve coverage
+- Tests: improve coverage
 - CI: run mypy
 
-## [0.2.2] - 2025-01-28
+## [0.2.2] - 2026-01-28
 
 ### Added
 
 - `geometry.cells_in_rect()`, `geometry.cells_in_circle()`
 
-## [0.2.1] - 2025-01-22
+## [0.2.1] - 2026-01-22
 
 ### Changed
 
 - `NavigationGrid` and `Grid` improvements
 
-## [0.2.0] - 2025-01-22
+## [0.2.0] - 2026-01-22
 
 ### Added
 
@@ -44,12 +51,12 @@ and this project attempts to adhere to [Semantic Versioning](https://semver.org/
 
 - Replaced `IntVector2.from_tuple()` with `IntVector2.from_point()`
   which takes `pygame.typing.IntPoint`, i.e. a pair of integers
-- `IntVector2` add/subtract broadened to take `pygame.typing.IntPoint` 
+- `IntVector2` add/subtract broadened to take `pygame.typing.IntPoint`
 
 ### Fixed
 
 - `pdoc` was a runtime instead of dev dependency
-- CI: Python 3.12 was always used, not version from matrix 
+- CI: Python 3.12 was always used, not version from matrix
 
 ## [0.1.3] - 2025-12-05
 
@@ -80,7 +87,9 @@ and this project attempts to adhere to [Semantic Versioning](https://semver.org/
 
 Initial release
 
-[UNRELEASED]: https://github.com/recreational-projects/flatlandian/compare/v0.2.1...HEAD
+[UNRELEASED]: https://github.com/recreational-projects/flatlandian/compare/v0.2.4...HEAD
+[0.2.4]: https://github.com/recreational-projects/flatlandian/compare/v0.2.3...v0.2.4
+[0.2.3]: https://github.com/recreational-projects/flatlandian/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/recreational-projects/flatlandian/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/recreational-projects/flatlandian/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/recreational-projects/flatlandian/compare/v0.1.4...v0.2.0
