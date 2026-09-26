@@ -1,6 +1,6 @@
 """Tests for `geometry` module."""
 
-from pygame.math import Vector2
+from vec import Vector2
 
 from flatlandian import geometry
 from flatlandian.grid import Grid
