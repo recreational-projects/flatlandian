@@ -52,6 +52,10 @@ extend-safe-fixes = [
     "S101", # assert
     "PLR2004", # magic-value-comparison
 ]
+"src/vec/*" = [
+    "ANN", # Not relevant in incomplete stubs
+    "N804"  # pep-8-naming
+]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
