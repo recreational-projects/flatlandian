@@ -6,10 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project attempts to adhere
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## UNRELEASED - TBC
+
+### Added
+
+- CI: add Python 3.15 to matrix
+
 ## [0.2.4] - 2026-09-26
 
-- build: locking resolution mode → lowest-direct
+### Added
+
 - Docs: improve README
+- Build: locking resolution mode → lowest-direct
 - Tests: improve coverage
 
 ## [0.2.3] - 2026-04-21
