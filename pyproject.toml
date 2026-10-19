@@ -13,21 +13,12 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
-    "mypy>=2.4.0",
     "pdoc>=16.0.0",
     "pre-commit>=4.7.0",
     "pyrefly>=1.4.0",
     "pytest>=9.1.1",
     "ruff>=0.17.1",
 ]
-
-[tool.mypy]
-strict = true
-disallow_any_unimported = true
-no_implicit_optional = true
-warn_unreachable = true
-show_error_codes = true
-pretty = true
 
 [tool.ruff.lint]
 future-annotations = true
@@ -57,3 +48,6 @@ convention = "google"
 
 [tool.uv]
 resolution = "lowest-direct"
+
+[tool.pyrefly]
+preset = "strict"
