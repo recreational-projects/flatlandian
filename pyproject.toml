@@ -16,7 +16,7 @@ dev = [
     "pdoc>=16.0.0",
     "pre-commit>=4.7.0",
     "pyrefly>=1.4.0",
-    "pytest>=9.1.1",
+    "pytest>=9.2.0",
     "ruff>=0.17.1",
 ]
 
