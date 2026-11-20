@@ -6,11 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project attempts to adhere
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## UNRELEASED - TBC
+## [0.3.0] - 2026-09-26
 
 ### Added
 
-- CI: add Python 3.15 to matrix
+-`IntVector2` supports iteration
+
+- CI:
+    - add Python 3.15 to matrix
+    - add Dependabot
+- Build: add dependency cooldown
+
+### Changed
+
+- Require pygame-ce >= 2.5.8
+- CI: pyrefly replaces mypy
+
+### Removed
+
+- `entity`, `world` modules
 
 ## [0.2.4] - 2026-09-26
 
@@ -95,7 +109,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 Initial release
 
-[UNRELEASED]: https://github.com/recreational-projects/flatlandian/compare/v0.2.4...HEAD
+[0.3.0]: https://github.com/recreational-projects/flatlandian/compare/v0.2.4...v0.3.0
 [0.2.4]: https://github.com/recreational-projects/flatlandian/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/recreational-projects/flatlandian/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/recreational-projects/flatlandian/compare/v0.2.1...v0.2.2
